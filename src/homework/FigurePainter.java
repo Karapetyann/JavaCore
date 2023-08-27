@@ -61,6 +61,40 @@ public class FigurePainter {
 
             System.out.println();
         }
+        int f = 5;
+        for (int i = 0; i < 6; i++) {
+            for (int j = i; j < 6; j++) {
+                System.out.print(" ");
+
+            }
+
+            for (int j = f; j < 6 ; j++) {
+                System.out.print("* ");
+            }
+            f--;
+            System.out.println();
+        }
+
+        int g = 4;
+        int h = 1;
+        for (int i = 0; i < 6; i++) {
+            for (int j = g; j < 6; j++) {
+                System.out.print(" ");
+
+            }
+            g--;
+            for (int j = h; j < 6; j++) {
+                System.out.print("* ");
+
+            }
+            h++;
+            System.out.println();
+        }
+
+
+
+
+
         System.out.println();
         System.out.println("FINISHED");
     }
