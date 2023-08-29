@@ -42,7 +42,6 @@ public class FigurePainter {
         System.out.println();
         System.out.println();
 
-
         int b = 0;
         int c = 5;
         for (int i = 6; i > 0; i--) {
@@ -57,10 +56,11 @@ public class FigurePainter {
 
             }
             b++;
-
-
             System.out.println();
         }
+
+        System.out.println();
+        System.out.println();
         int f = 5;
         for (int i = 0; i < 6; i++) {
             for (int j = i; j < 6; j++) {
@@ -74,6 +74,7 @@ public class FigurePainter {
             f--;
             System.out.println();
         }
+
 
         int g = 4;
         int h = 1;
