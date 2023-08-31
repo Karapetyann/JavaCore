@@ -1,9 +1,14 @@
 package homework;
 
+import java.io.FileOutputStream;
 import java.sql.SQLOutput;
 
 public class FigurePainter {
     public static void main(String[] args) {
+        System.out.println("FIGUR 1");
+        System.out.println();
+
+
         for (int i = 6; i > 0; i--) {
             for (int j = i; j <= 6; j++) {
                 System.out.print("* ");
@@ -12,6 +17,7 @@ public class FigurePainter {
 
         }
         System.out.println();
+        System.out.println("FIGUR 2");
         System.out.println();
 
         for (int i = 0; i < 6; i++) {
@@ -21,6 +27,7 @@ public class FigurePainter {
             System.out.println();
         }
         System.out.println();
+        System.out.println("FIGUR 3");
         System.out.println();
 
 
@@ -40,6 +47,7 @@ public class FigurePainter {
             System.out.println();
         }
         System.out.println();
+        System.out.println("FIGUR 4");
         System.out.println();
 
         int b = 0;
@@ -60,6 +68,7 @@ public class FigurePainter {
         }
 
         System.out.println();
+        System.out.println("FIGUR 5");
         System.out.println();
         int f = 5;
         for (int i = 0; i < 6; i++) {
@@ -68,7 +77,7 @@ public class FigurePainter {
 
             }
 
-            for (int j = f; j < 6 ; j++) {
+            for (int j = f; j < 6; j++) {
                 System.out.print("* ");
             }
             f--;
@@ -91,9 +100,6 @@ public class FigurePainter {
             h++;
             System.out.println();
         }
-
-
-
 
 
         System.out.println();
