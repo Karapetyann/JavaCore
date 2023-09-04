@@ -55,13 +55,14 @@ public class ArrayUtil {
         System.out.println("Task 6");
         System.out.println();
 
-        int max = numbers.length-1;
-        int midl = 0;
-        for (int i = numbers[0], j= numbers[max]; i < j; i++, j--) {
-             midl = numbers[i];
-        }
-        System.out.println(midl);
 
+        if (numbers.length /2 <= 2){
+            System.out.println("can't print middle value");
+        } else if (numbers.length%2==0) {
+            System.out.println(numbers[numbers.length / 2-1]+" "+numbers[numbers.length/2]);
+        }else {
+            System.out.println(numbers[numbers.length / 2]);
+        }
 
         System.out.println();
         System.out.println("Task 7");
