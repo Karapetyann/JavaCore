@@ -8,7 +8,7 @@ public class ArrayUtil {
         System.out.println("Task 1");
 
         for (int i = 0; i < numbers.length; i++) {
-            System.out.print(numbers[i]+" ");
+            System.out.print(numbers[i] + " ");
         }
 
         System.out.println();
@@ -24,7 +24,7 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int n = numbers.length-1;
+        int n = numbers.length - 1;
         System.out.println(numbers[n]);
 
 
@@ -44,8 +44,8 @@ public class ArrayUtil {
 
         int min = numbers[0];
         for (int i = 0; i < numbers.length; i++) {
-            if (min > numbers[i]){
-                min= numbers[i];
+            if (min > numbers[i]) {
+                min = numbers[i];
             }
         }
         System.out.println(min);
@@ -56,11 +56,11 @@ public class ArrayUtil {
         System.out.println();
 
 
-        if (numbers.length /2 <= 2){
+        if (numbers.length / 2 <= 2) {
             System.out.println("can't print middle value");
-        } else if (numbers.length%2==0) {
-            System.out.println(numbers[numbers.length / 2-1]+" "+numbers[numbers.length/2]);
-        }else {
+        } else if (numbers.length % 2 == 0) {
+            System.out.println(numbers[numbers.length / 2 - 1] + " " + numbers[numbers.length / 2]);
+        } else {
             System.out.println(numbers[numbers.length / 2]);
         }
 
@@ -69,9 +69,9 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int zuig= 0;
+        int zuig = 0;
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i]%2==0){
+            if (numbers[i] % 2 == 0) {
                 zuig++;
             }
         }
@@ -83,10 +83,9 @@ public class ArrayUtil {
         System.out.println();
 
 
-
         int kent = 0;
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i]%2!=0){
+            if (numbers[i] % 2 != 0) {
                 kent++;
             }
         }
@@ -98,10 +97,9 @@ public class ArrayUtil {
         System.out.println();
 
 
-
         int gumar = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
-            gumar = numbers[i]+ gumar;
+            gumar = numbers[i] + gumar;
         }
         System.out.println(gumar);
 
@@ -110,10 +108,9 @@ public class ArrayUtil {
         System.out.println("Task 10");
         System.out.println();
 
-        System.out.println(gumar/2);
-
-
+        System.out.println(gumar / 2);
 
 
     }
 }
+
