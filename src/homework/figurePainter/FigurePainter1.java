@@ -50,7 +50,7 @@ public class FigurePainter1 {
         }
     }
 
-    void paint5(int d){
+    void paint5(int d) {
         for (int i = 0; i < d; i++) {
             for (int j = i; j < d; j++) {
                 System.out.print(" ");
