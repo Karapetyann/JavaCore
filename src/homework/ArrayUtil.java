@@ -24,8 +24,7 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int n = numbers.length - 1;
-        System.out.println(numbers[n]);
+        System.out.println(numbers.length-1);
 
 
         System.out.println();
@@ -33,8 +32,7 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int length = numbers.length;
-        System.out.println(length);
+        System.out.println(numbers.length);
 
 
         System.out.println();
@@ -69,13 +67,13 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int zuig = 0;
+        int even = 0;
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] % 2 == 0) {
-                zuig++;
+                even++;
             }
         }
-        System.out.println(zuig);
+        System.out.println(even);
 
 
         System.out.println();
@@ -83,13 +81,13 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int kent = 0;
+        int odd = 0;
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] % 2 != 0) {
-                kent++;
+                odd++;
             }
         }
-        System.out.println(kent);
+        System.out.println(odd);
 
 
         System.out.println();
@@ -97,18 +95,18 @@ public class ArrayUtil {
         System.out.println();
 
 
-        int gumar = numbers[0];
+        int sum = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
-            gumar = numbers[i] + gumar;
+            sum = numbers[i] + sum;
         }
-        System.out.println(gumar);
+        System.out.println(sum);
 
 
         System.out.println();
         System.out.println("Task 10");
         System.out.println();
 
-        System.out.println(gumar / 2);
+        System.out.println(sum / 2);
 
 
     }
