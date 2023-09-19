@@ -19,8 +19,15 @@ public class DinamicArrayDemo {
         dArray.push(13);
         dArray.push(14);
         dArray.push(15);
+        dArray.push(16);
+        dArray.push(17);
+        dArray.push(18);
+        dArray.push(19);
+        dArray.push(20);
+        dArray.push(21);
 
-        int index = dArray.getByIndex(66);
+
+        int index = dArray.getByIndex(15);
         System.out.println(index);
 
         System.out.println();
