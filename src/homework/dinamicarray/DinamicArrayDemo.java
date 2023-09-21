@@ -24,13 +24,29 @@ public class DinamicArrayDemo {
         dArray.push(18);
         dArray.push(19);
         dArray.push(20);
-        dArray.push(21);
+
 
 
         int index = dArray.getByIndex(15);
         System.out.println(index);
 
         System.out.println();
+
+        dArray.deleteByIndex(10);
+        System.out.println();
+
+        dArray.set(5, 45);
+
+        dArray.add(2,40);
+
+
+        System.out.println(dArray.exists(40));
+
+        System.out.println();
+        System.out.println(dArray.getIndexByValue(20));
+
+        dArray.add(2,7);
+        dArray.print();
 
         dArray.print();
 
