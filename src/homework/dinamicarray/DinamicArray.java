@@ -71,7 +71,7 @@ public class DinamicArray {
 
 
     public void add(int index, int value) {
-        if (size == array.length) {
+        if (size == array.length-1) {
             extend();
         }
         if (index > size || index < 0) {

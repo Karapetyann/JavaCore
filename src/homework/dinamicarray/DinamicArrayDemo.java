@@ -34,19 +34,20 @@ public class DinamicArrayDemo {
 
         dArray.deleteByIndex(10);
         System.out.println();
+        dArray.add(2,7);
 
         dArray.set(5, 45);
 
-        dArray.add(2,40);
+
 
 
         System.out.println(dArray.exists(40));
 
         System.out.println();
         System.out.println(dArray.getIndexByValue(20));
+        dArray.add(2,40);
 
-        dArray.add(2,7);
-        dArray.print();
+
 
         dArray.print();
 
