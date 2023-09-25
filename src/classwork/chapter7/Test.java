@@ -3,6 +3,15 @@ package classwork.chapter7;
 public class Test {
     int a;
 
+    public int b;
+    private int c;
+    void sets(int i){
+        c = i;
+    }
+    int getC(){
+        return c;
+    }
+
     Test(int i) {
         a = i;
     }
