@@ -7,10 +7,10 @@ public class StackTest {
 
 
         for (int i = 0; i < 10; i++) {
-            myStack1.pash(i);
+            myStack1.push(i);
         }
         for (int i = 10; i < 20; i++) {
-            myStack2.pash(i);
+            myStack2.push(i);
         }
 
         System.out.println("Содержимое стека myStack1: ");
