@@ -9,12 +9,13 @@ public class Stack {
     }
 
     public void push(int value) {
-        if (size == array.length) {
-           extend();
+        if (size == array.length - 1) {
+            extend();
         } else {
             array[++size] = value;
         }
     }
+
     private void extend() {
         int[] array1 = new int[array.length + 10];
         for (int i = 0; i < size; i++) {
@@ -26,10 +27,12 @@ public class Stack {
 
     public int pop() {
         if (size < 0) {
-            System.out.println("стек не заполнен");
             return 0;
         } else
             return array[size--];
     }
 
+    public int getSize() {
+        return size;
+    }
 }

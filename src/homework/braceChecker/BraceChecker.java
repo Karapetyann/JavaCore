@@ -1,71 +1,37 @@
 package homework.braceChecker;
 
-public class BraceChecker {
+import classwork.chapter6.Stack;
 
+public class BraceChecker {
     private String text;
     private Stack stack = new Stack();
-
     public BraceChecker(String st) {
         text = st;
-        for (int i = 0; i < st.length(); i++) {
-            stack.push(st.charAt(i));
-        }
     }
-
+    char c;
     public void check() {
-        int index;
-        for (int i = 0; i < stack.array.length; i++) {
-            char pp = stack.array[i];
-            switch (pp) {
+        for (int i = 0; i < text.length(); i++) {
+            switch (text.charAt(i)) {
                 case '(':
-                    for (int j = i; j <= stack.array.length; j++) {
-                        if (text.charAt(j) == ')') {
-                            System.out.println("True");
-                            break;
-                        } else if (text.charAt(j) == '}') {
-                            System.out.println("Error: opened ( but closed } at:" + j);
-                            break;
-                        } else if (text.charAt(j) == ']') {
-                            System.out.println("Error: opened ( but closed ] at:" + j);
-                            break;
-                        }
-                    }
-                    break;
                 case '[':
-                    for (int j = i; j <= stack.array.length; j++) {
-                        if (text.charAt(j) == ']') {
-                            System.out.println("True");
-                            break;
-                        } else if (text.charAt(j) == ')') {
-                            System.out.println("Error: opened [ but closed ) at:" + j);
-                            break;
-                        } else if (text.charAt(j) == '}') {
-                            System.out.println("Error: opened [ but closed } at:" + j);
-                            break;
-                        }
-                    }
-                    break;
                 case '{':
-                    for (int j = i; j <= stack.array.length; j++) {
-                        if (text.charAt(j) == '}') {
-                            System.out.println("True");
-                            break;
-                        } else if (text.charAt(j) == ')') {
-                            System.out.println("Error: opened { but closed ) at:" + j);
-                            break;
-                        } else if (text.charAt(j) == ']') {
-                            System.out.println("Error: opened { but closed ] at:" + j);
-                            break;
+                    stack.push(text.charAt(i));
+                    break;
+                case ')':
+                case ']':
+                case '}':
+                    if (stack.getSize() == -1) {
+                        System.out.println("Error: closed " + text.charAt(i) + " but didn't open " + i);
+                    } else {
+                        c = (char) stack.pop();
+                        if (text.charAt(i) == ')' && c != '(' || text.charAt(i) == ']' && c != '[' || text.charAt(i) == '}' && c != '{') {
+                            System.out.println("error " + c + " but closed" + text.charAt(i) + " :" + i);
                         }
                     }
-                    break;
-                default:
-                    break;
             }
-
-
         }
-
-
+        for (int i = 0; i <= stack.getSize(); ) {
+            System.out.println("error opened " + (char) stack.pop() + " but don't closed");
+        }
     }
 }
