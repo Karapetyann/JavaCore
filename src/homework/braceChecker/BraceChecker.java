@@ -5,11 +5,14 @@ import classwork.chapter6.Stack;
 public class BraceChecker {
     private String text;
     private Stack stack = new Stack();
+
     public BraceChecker(String st) {
         text = st;
     }
-    char c;
+
+
     public void check() {
+        char c;
         for (int i = 0; i < text.length(); i++) {
             switch (text.charAt(i)) {
                 case '(':

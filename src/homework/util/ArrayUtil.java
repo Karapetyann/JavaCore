@@ -24,7 +24,7 @@ public class ArrayUtil {
         System.out.println();
 
 
-        arr.arrayMax(numbers);
+//        arr.arrayMax(numbers);
 
 
         System.out.println();

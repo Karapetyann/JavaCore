@@ -11,9 +11,6 @@ public class Array1 {
         System.out.println(arr[0]);
     }
 
-    void arrayMax(int[] arr) {
-        System.out.println(arr.length - 1);
-    }
 
     void arrayLength(int[] arr){
         System.out.println(arr.length);
@@ -66,6 +63,16 @@ public class Array1 {
         }
         System.out.println(sum);
         return sum;
+    }
+
+    public static int max(int[] arr) {
+        int max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max){
+                max = arr[i];
+            }
+        }
+        return max;
     }
 
 
