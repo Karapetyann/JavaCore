@@ -19,24 +19,22 @@ public class EmployeeStorage {
         }
     }
 
-    public void ID(String ID) {
+    public void searchEmployeeById(String id) {
         for (int i = 0; i < size; i++) {
-            if (employees[i].getEmplyeeID().contains(ID)) {
+            if (employees[i].getEmplyeeID().contains(id)) {
                 System.out.println(employees[i].getEmplyeeID());
             }
         }
-
     }
 
-    public void empC(String empC) {
+    public void searchEmployeeByCompany(String companyName) {
         for (int i = 0; i < size; i++) {
-            if (employees[i].getCompany().contains(empC)) {
+            if (employees[i].getCompany().contains(companyName)) {
                 System.out.println("| Name: " + employees[i].getName() + "| Surname: " + employees[i].getSurname() + "| EmployeeID: " +
                         employees[i].getEmplyeeID() + "| Salary: " + employees[i].getSalary() + "| Company: " + employees[i].getCompany()
                         + "| Position: " + employees[i].getPosition());
             }
         }
-
     }
 
 

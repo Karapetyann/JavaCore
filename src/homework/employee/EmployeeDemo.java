@@ -43,15 +43,14 @@ public class EmployeeDemo {
                     System.out.println("---------------------");
                     break;
                 case "3":
-                    System.out.println("Please input Employee ID");
-                    String ID = scanner.nextLine();
-                    employeeStorage.ID(ID);
+                    System.out.println("Please input Employee by ID");
+                    employeeStorage.searchEmployeeById(scanner.nextLine());
                     break;
                 case "4":
                     System.out.println("Please input empluyee COMPANY");
                     System.out.println("---------------------");
-                    String empC = scanner.nextLine();
-                    employeeStorage.empC(empC);
+                    String companyName = scanner.nextLine();
+                    employeeStorage.searchEmployeeByCompany(companyName);
                     System.out.println("---------------------");
                     break;
                 default:
