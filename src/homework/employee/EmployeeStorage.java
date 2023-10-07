@@ -2,7 +2,6 @@ package homework.employee;
 public class EmployeeStorage {
     private Employee[] employees = new Employee[10];
     private int size;
-    public static int index;
 
     public void add(Employee employee) {
         if (employees.length == 10) {
