@@ -51,7 +51,7 @@ public class EmployeeStorage {
 
      public void deletebyId(String id){
          for (int i = 0; i < size; i++) {
-             if (employees[i].getEmployeeID().contains(id)){
+             if (employees[i].getEmployeeID().equals(id)){
                  for (int j = i; j < size; j++) {
                      employees[i]=employees[i+1];
                  }
@@ -64,15 +64,26 @@ public class EmployeeStorage {
 
     public void changeEmployeeById(String id){
         for (int i = 0; i < size; i++) {
-            if (employees[i].getEmployeeID().contains(id)){
-               index = i;
-               changID();
+            if (employees[i].getEmployeeID().equals(id)){
+                System.out.println("Please input employee NAME");
+               employees[i].setName( EmployeeDemo.scanner.nextLine());
+                System.out.println("Please input employee SURNAME");
+                employees[i].setSurname(EmployeeDemo.scanner.nextLine());
+                System.out.println("Please input employee EMPLOYEE-ID");
+                 employees[i].setEmployeeID(EmployeeDemo.scanner.nextLine());
+                System.out.println("Please input employee SALARY");
+               employees[i].setSalary(Double.parseDouble(EmployeeDemo.scanner.nextLine()))
+                System.out.println("Please input employee COMPANY");
+                employees[i].setCompany(EmployeeDemo.scanner.nextLine());
+                System.out.println("Please input employee POSITION");
+                employees[i].setPosition(EmployeeDemo.scanner.nextLine());
+                System.out.println("Employee created!");
             }
+
+
         }
     }
-    public void addid(Employee employeed) {
-        employees[index] = employeed;
-    }
+
 
 
 }

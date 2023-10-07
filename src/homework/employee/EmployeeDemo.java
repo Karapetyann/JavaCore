@@ -38,7 +38,6 @@ public class EmployeeDemo {
                 case "6":
                     System.out.println("Please input Change employee by id");
                     employeeStorage.changeEmployeeById(scanner.nextLine());
-
                     break;
                 default:
                     System.out.println("Invalid command. Try again!");
@@ -82,21 +81,5 @@ public class EmployeeDemo {
         System.out.println("Please input 5 for DELETE EMPLUYEE BY ID");
         System.out.println("Please input 6 for CHANGE ADD EMPLOYEE");
     }
-    public static void changID(){
-        System.out.println("Please input employee NAME");
-        String name = scanner.nextLine();
-        System.out.println("Please input employee SURNAME");
-        String surname = scanner.nextLine();
-        System.out.println("Please input employee EMPLOYEE-ID");
-        String employeeID = scanner.nextLine();
-        System.out.println("Please input employee SALARY");
-        double salary = Double.parseDouble(scanner.nextLine());
-        System.out.println("Please input employee COMPANY");
-        String company = scanner.nextLine();
-        System.out.println("Please input employee POSITION");
-        String position = scanner.nextLine();
-        Employee employeed = new Employee(name, surname, employeeID, salary, company, position);
-        employeeStorage.addid(employeed);
-        System.out.println("Employee created!");
-    }
+
 }
