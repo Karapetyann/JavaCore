@@ -6,10 +6,10 @@ public class EmployeeDemo {
 
     static Scanner scanner = new Scanner(System.in);
     static EmployeeStorage employeeStorage = new EmployeeStorage();
+
     public static void main(String[] args) {
 
         boolean isrun = true;
-
 
         while (isrun) {
             printCommand();

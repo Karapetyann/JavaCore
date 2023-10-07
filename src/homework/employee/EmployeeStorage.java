@@ -1,8 +1,4 @@
 package homework.employee;
-
-import static homework.employee.EmployeeDemo.addEmplyee;
-import static homework.employee.EmployeeDemo.changID;
-
 public class EmployeeStorage {
     private Employee[] employees = new Employee[10];
     private int size;
@@ -49,41 +45,36 @@ public class EmployeeStorage {
         employees = tmp;
     }
 
-     public void deletebyId(String id){
-         for (int i = 0; i < size; i++) {
-             if (employees[i].getEmployeeID().equals(id)){
-                 for (int j = i; j < size; j++) {
-                     employees[i]=employees[i+1];
-                 }
-                 size--;
-             }else {
-                 System.out.println("Sorry this ID was not found");
-             }
-         }
-     }
-
-    public void changeEmployeeById(String id){
+    public void deletebyId(String id) {
         for (int i = 0; i < size; i++) {
-            if (employees[i].getEmployeeID().equals(id)){
+            if (employees[i].getEmployeeID().equals(id)) {
+                for (int j = i; j < size; j++) {
+                    employees[i] = employees[i + 1];
+                }
+                size--;
+            } else {
+                System.out.println("Sorry this ID was not found");
+            }
+        }
+    }
+
+    public void changeEmployeeById(String id) {
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getEmployeeID().equals(id)) {
                 System.out.println("Please input employee NAME");
-               employees[i].setName( EmployeeDemo.scanner.nextLine());
+                employees[i].setName(EmployeeDemo.scanner.nextLine());
                 System.out.println("Please input employee SURNAME");
                 employees[i].setSurname(EmployeeDemo.scanner.nextLine());
                 System.out.println("Please input employee EMPLOYEE-ID");
-                 employees[i].setEmployeeID(EmployeeDemo.scanner.nextLine());
+                employees[i].setEmployeeID(EmployeeDemo.scanner.nextLine());
                 System.out.println("Please input employee SALARY");
-               employees[i].setSalary(Double.parseDouble(EmployeeDemo.scanner.nextLine()))
+                employees[i].setSalary(Double.parseDouble(EmployeeDemo.scanner.nextLine()));
                 System.out.println("Please input employee COMPANY");
                 employees[i].setCompany(EmployeeDemo.scanner.nextLine());
                 System.out.println("Please input employee POSITION");
                 employees[i].setPosition(EmployeeDemo.scanner.nextLine());
                 System.out.println("Employee created!");
             }
-
-
         }
     }
-
-
-
 }

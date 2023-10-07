@@ -4,7 +4,7 @@ public class Employee {
     private String name;
     private String surname;
     private String employeeID = "A0001";
-    private double  salary;
+    private double salary;
     private String company;
     private String position;
 
