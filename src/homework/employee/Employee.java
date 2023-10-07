@@ -3,7 +3,7 @@ package homework.employee;
 public class Employee {
     private String name;
     private String surname;
-    private String emplyeeID = "A0001";
+    private String employeeID = "A0001";
     private double  salary;
     private String company;
     private String position;
@@ -11,7 +11,7 @@ public class Employee {
     public Employee(String name, String surname, String emplyeeID, double salary, String company, String position) {
         this.name = name;
         this.surname = surname;
-        this.emplyeeID = emplyeeID;
+        this.employeeID = emplyeeID;
         this.salary = salary;
         this.company = company;
         this.position = position;
@@ -36,12 +36,12 @@ public class Employee {
         this.surname = surname;
     }
 
-    public String getEmplyeeID() {
-        return emplyeeID;
+    public String getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmplyeeID(String emplyeeID) {
-        this.emplyeeID = emplyeeID;
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
     }
 
     public double getSalary() {

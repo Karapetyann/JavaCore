@@ -1,7 +1,7 @@
 package homework.autoSort;
 
 public class SortAuto {
-    void sort(int[] arr) {
+    public void sort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 1; j < arr.length - i; j++) {
                 int a;
