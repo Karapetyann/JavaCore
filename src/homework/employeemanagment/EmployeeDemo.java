@@ -1,6 +1,10 @@
 package homework.employeemanagment;
 
-import java.sql.SQLOutput;
+import homework.employeemanagment.model.Company;
+import homework.employeemanagment.model.Employee;
+import homework.employeemanagment.storage.CompanyStorage;
+import homework.employeemanagment.storage.EmployeeStorage;
+
 import java.util.Scanner;
 
 public class EmployeeDemo {
@@ -105,7 +109,7 @@ public class EmployeeDemo {
         String companyAddres = scanner.nextLine();
         companyFromStorage.setName(companyName);
         companyFromStorage.setAddress(companyAddres);
-        System.out.println("company ['updated");
+        System.out.println("company updated");
     }
 
     private static void deleteEmployee() {
