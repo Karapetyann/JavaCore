@@ -8,9 +8,9 @@ import homework.medicalCenter.storage.PatientStorage;
 import java.util.Scanner;
 
 public class medicalCenterMain {
-    private static Scanner scanner = new Scanner(System.in);
-    private static PatientStorage patientStorage = new PatientStorage();
-    private static DoctorStorage doctorStorage = new DoctorStorage();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final PatientStorage patientStorage = new PatientStorage();
+    private static final DoctorStorage doctorStorage = new DoctorStorage();
 
     public static void main(String[] args) {
         boolean isRun = true;
@@ -61,7 +61,7 @@ public class medicalCenterMain {
         String doctorId = scanner.nextLine();
         Doctor doctorFromStorage = doctorStorage.getById(doctorId);
         if (doctorFromStorage == null) {
-            System.out.println("doctor with " + doctorFromStorage + " does not exists!!!");
+            System.out.println("doctor with " + doctorId + " does not exists!!!");
             return;
         }
         patientStorage.printPatient(doctorFromStorage);
@@ -73,7 +73,7 @@ public class medicalCenterMain {
         String doctorId = scanner.nextLine();
         Doctor doctorFromStorage = doctorStorage.getById(doctorId);
         if (doctorFromStorage == null) {
-            System.out.println("doctor with " + doctorFromStorage + " does not exists!!!");
+            System.out.println("doctor with " + doctorId + " does not exists!!!");
             return;
         }
         System.out.println("please input Patient Id");
@@ -100,7 +100,7 @@ public class medicalCenterMain {
         String doctorId = scanner.nextLine();
         Doctor doctorFromStorage = doctorStorage.getById(doctorId);
         if (doctorFromStorage == null) {
-            System.out.println("doctor with " + doctorFromStorage + " does not exists!!!");
+            System.out.println("doctor with " + doctorId + " does not exists!!!");
             return;
         }
         System.out.println("please input Doctor name");
@@ -121,7 +121,7 @@ public class medicalCenterMain {
         String doctorId = scanner.nextLine();
         Doctor doctorFromStorage = doctorStorage.getById(doctorId);
         if (doctorFromStorage == null) {
-            System.out.println("doctor with " + doctorFromStorage + " does not exists!!!");
+            System.out.println("doctor with " + doctorId + " does not exists!!!");
             return;
         }
         doctorStorage.deleteById(doctorFromStorage);
