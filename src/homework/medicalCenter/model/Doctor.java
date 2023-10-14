@@ -1,6 +1,6 @@
 package homework.medicalCenter.model;
 
-public class Doctor extends Person{
+public class Doctor extends Person {
     private String email;
     private String profession;
 
