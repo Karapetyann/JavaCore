@@ -1,7 +1,11 @@
 package homework.medicalCenter;
+
 import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
 import homework.medicalCenter.model.Person;
+import homework.medicalCenter.util.DateUtil;
+
+import java.util.Date;
 
 public class Storage {
     private Person[] persons = new Person[10];
@@ -81,4 +85,21 @@ public class Storage {
             }
         }
     }
+
+
+    public boolean checkingAccuracy(Doctor doctor, Date arrivingTime) {
+        for (int i = size; i > 0; i++) {
+            if (persons[i] instanceof Patient){
+                if (((Patient) persons[i]).getDoctor() == doctor) {
+                    Patient patient = (Patient) persons[i];
+                    if (DateUtil.byMinut(patient.getArrivingTime()) -DateUtil.byMinut(arrivingTime) < 30) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
 }

@@ -2,48 +2,51 @@ package homework.medicalCenter;
 
 import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
+import homework.medicalCenter.util.DateUtil;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
-public class medicalCenterMain {
+public class medicalCenterMain implements Comand {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Storage doctor = new Storage();
     private static final Storage patient = new Storage();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         boolean isRun = true;
         while (isRun) {
-            printCommand();
+            Comand.printCommand();
             String command = scanner.nextLine();
             switch (command) {
-                case "0":
+                case EXIT:
                     isRun = false;
                     break;
-                case "1":
+                case ADD_DOCTOR:
                     addDoctor();
                     break;
-                case "2":
+                case SEARCH_DOCTOR_BY_PROFESSION:
                     searchDoctorByProfession();
                     break;
-                case "3":
+                case DELETE_DOCTOR_BY_ID:
                     deleteDoctorById();
                     break;
-                case "4":
+                case CHANGE_DOCTOR_BY_ID:
                     changeDoctorById();
                     break;
-                case "5":
+                case ADD_PATIENT:
                     addPatient();
                     break;
-                case "6":
+                case PRINT_DOCTOR_PATIENT:
                     allPatientByDoctor();
                     break;
-                case "7":
+                case PRINT_ALL_PATIENT:
                     patient.printAllPatient();
                     break;
-                case "8":
+                case PRINT_ALL_DOCTORS:
                     doctor.printAllDoctors();
                 default:
-                    System.out.println("Invalid comand. Try again");
+                    System.out.println("Invalid command. Try again");
             }
         }
     }
@@ -55,18 +58,18 @@ public class medicalCenterMain {
         String doctorId = scanner.nextLine();
         Doctor doctor1 = (Doctor) doctor.getById(doctorId);
         if (doctor1 == null) {
-            System.out.println("doctor with " + doctor1 + " does not exists!!!");
+            System.out.println("doctor with does not exists!!!");
             return;
         }
         patient.printAllPatientByDoctor(doctor1);
     }
 
-    private static void addPatient() {
+    private static void addPatient() throws ParseException {
         System.out.println("please input Doctor id");
         doctor.printAllDoctors();
         Doctor doctor1 = (Doctor) doctor.getById(scanner.nextLine());
         if (doctor1 == null) {
-            System.out.println("doctor with " + doctor1 + " does not exists!!!");
+            System.out.println("doctor with does not exists!!!");
             return;
         }
         System.out.println("please input Patient id");
@@ -83,9 +86,15 @@ public class medicalCenterMain {
         String patientSurname = scanner.nextLine();
         System.out.println("please input Patient phone number");
         String patientPhone = scanner.nextLine();
-        System.out.println("please input Patient registred date time (dd/MM/yyyy)");
-        String patientDate = scanner.nextLine();
-        Patient patient2 = new Patient(patientId, patientName, patientSurname, patientPhone, patientDate, doctor1);
+        System.out.println("please input Patient registred date time (dd/MM/yyyy HH/mm)");
+        String arrivingTimeStr = scanner.nextLine();
+        Date arrivingTime = DateUtil.stringToDate(arrivingTimeStr);
+        if (patient.checkingAccuracy(doctor1, arrivingTime)){
+            System.out.println("that time already exist. tray again ");
+            addPatient();
+        }
+        Date date = new Date();
+        Patient patient2 = new Patient(patientId, patientName, patientSurname, patientPhone, date, arrivingTime, doctor1);
         patient.add(patient2);
         System.out.println("Patient registred");
 
@@ -155,16 +164,5 @@ public class medicalCenterMain {
     }
 
 
-    private static void printCommand() {
-        System.out.println("Please input 0 for EXIT");
-        System.out.println("Please input 1 for ADD DOCTOR");
-        System.out.println("Please input 2 for SEARCH DOCTOR BY PROFESSION");
-        System.out.println("Please input 3 for DELETE DOCTOR BY ID");
-        System.out.println("Please input 4 for CHANGE DOCTOR BY ID");
-        System.out.println("Please input 5 for ADD PATIENT");
-        System.out.println("Please input 6 for PRINT DOCTOR'S PATIENTS");
-        System.out.println("Please input 7 for PRINT ALL PATIENT");
-        System.out.println("Please input 8 for PRINT ALL DOCTORS");
-    }
 }
 

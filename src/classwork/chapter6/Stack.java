@@ -1,25 +1,22 @@
 package classwork.chapter6;
 
 public class Stack {
-    private int array[] = new int[10];
+    private int[]array = new int[10];
     private int size;
 
-    public Stack() {
-        size = -1;
-    }
 
     public void push(int value) {
-        if (size == array.length - 1) {
+        if (size == array.length) {
             extend();
-        } else {
-            array[++size] = value;
         }
+        array[size++] = value;
+
     }
 
     private void extend() {
         int[] array1 = new int[array.length + 10];
         for (int i = 0; i < size; i++) {
-            array1[i] = array[i];
+            System.arraycopy(array,0,array1,0,array.length);
         }
         array = array1;
     }
