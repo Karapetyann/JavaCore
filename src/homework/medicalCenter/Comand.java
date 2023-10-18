@@ -12,8 +12,7 @@ public interface Comand {
     String PRINT_ALL_DOCTORS = "8";
 
 
-
-    static void printCommand(){
+    static void printCommand() {
         System.out.println("Please input " + EXIT + " for EXIT");
         System.out.println("Please input " + ADD_DOCTOR + " for ADD DOCTOR");
         System.out.println("Please input " + SEARCH_DOCTOR_BY_PROFESSION + " for SEARCH DOCTOR BY PROFESSION");

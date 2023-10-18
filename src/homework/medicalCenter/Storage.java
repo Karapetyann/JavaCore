@@ -89,10 +89,10 @@ public class Storage {
 
     public boolean checkingAccuracy(Doctor doctor, Date arrivingTime) {
         for (int i = size; i > 0; i++) {
-            if (persons[i] instanceof Patient){
+            if (persons[i] instanceof Patient) {
                 if (((Patient) persons[i]).getDoctor() == doctor) {
                     Patient patient = (Patient) persons[i];
-                    if (DateUtil.byMinut(patient.getArrivingTime()) -DateUtil.byMinut(arrivingTime) < 30) {
+                    if (DateUtil.byMinut(patient.getArrivingTime()) - DateUtil.byMinut(arrivingTime) < 30) {
                         return true;
                     }
                 }

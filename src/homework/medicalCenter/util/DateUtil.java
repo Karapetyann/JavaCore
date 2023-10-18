@@ -4,10 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class  DateUtil {
+public abstract class DateUtil {
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    public static int byMinut (Date date){
+
+    public static int byMinut(Date date) {
         int hours = date.getHours();
         int minuts = date.getMinutes();
         minuts = (hours * 60) + minuts;
@@ -18,7 +19,7 @@ public abstract class  DateUtil {
         return SDF.parse(dateStr);
     }
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         return SDF.format(date);
     }
 
