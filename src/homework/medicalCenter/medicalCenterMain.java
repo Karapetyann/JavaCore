@@ -89,7 +89,7 @@ public class medicalCenterMain implements Comand {
         System.out.println("please input Patient registred date time (dd/MM/yyyy HH/mm)");
         String arrivingTimeStr = scanner.nextLine();
         Date arrivingTime = DateUtil.stringToDate(arrivingTimeStr);
-        if (patient.checkingAccuracy(doctor1, arrivingTime)){
+        if (patient.checkingAccuracy(doctor1, arrivingTime)) {
             System.out.println("that time already exist. tray again ");
             addPatient();
         }
