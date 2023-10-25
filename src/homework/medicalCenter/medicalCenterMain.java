@@ -2,6 +2,7 @@ package homework.medicalCenter;
 
 import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
+import homework.medicalCenter.util.Comand;
 import homework.medicalCenter.util.DateUtil;
 
 import java.text.ParseException;
@@ -64,7 +65,7 @@ public class medicalCenterMain implements Comand {
         patient.printAllPatientByDoctor(doctor1);
     }
 
-    private static void addPatient() throws ParseException {
+    private static void addPatient() {
         System.out.println("please input Doctor id");
         doctor.printAllDoctors();
         Doctor doctor1 = (Doctor) doctor.getById(scanner.nextLine());
@@ -88,7 +89,13 @@ public class medicalCenterMain implements Comand {
         String patientPhone = scanner.nextLine();
         System.out.println("please input Patient registred date time (dd/MM/yyyy HH/mm)");
         String arrivingTimeStr = scanner.nextLine();
-        Date arrivingTime = DateUtil.stringToDate(arrivingTimeStr);
+        Date arrivingTime = null;
+        try {
+            arrivingTime = DateUtil.stringToDate(arrivingTimeStr);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            addPatient();
+        }
         if (patient.checkingAccuracy(doctor1, arrivingTime)) {
             System.out.println("that time already exist. tray again ");
             addPatient();
