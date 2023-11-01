@@ -18,15 +18,24 @@ public class StoreMain implements Command {
     private final static OrderStorage orderStorage = new OrderStorage();
 
     public static void main(String[] args) {
+        User user = new User("077885664", "Hakob", "karapetyan@mail.ru", "364421hk", UserType.ADMIN);
+        userStorage.addUser(user);
         boolean isRun = true;
         while (isRun) {
             Command.loginCommand();
             String command = scanner.nextLine();
             switch (command) {
-                case EXIT -> isRun = false;
-                case LOGIN -> login();
-                case REGISTER -> register();
-                default -> System.out.println("Wrong Command!! Try Again");
+                case EXIT:
+                    isRun = false;
+                    break;
+                case LOGIN:
+                    login();
+                    break;
+                case REGISTER:
+                    register();
+                    break;
+                default:
+                    System.out.println("Wrong Command!! Try Again");
             }
         }
     }
@@ -43,6 +52,7 @@ public class StoreMain implements Command {
         if (user1 == null) {
             User user = new User(userId, name, email, password, UserType.USER);
             userStorage.addUser(user);
+            System.out.println("successfully registered");
         } else {
             System.out.println("this account already exists");
         }
@@ -72,12 +82,23 @@ public class StoreMain implements Command {
         String command = scanner.nextLine();
         while (isRun) {
             switch (command) {
-                case LOGOUT -> isRun = false;
-                case PRINT_ALL_PRODUCTS -> printProducts();
-                case BUY_PRODUCT -> buyProduct();
-                case PRINT_MY_ORDERS -> printMyOrders();
-                case CANCEL_ORDER_BY_ID -> cancelOrderById();
-                default -> System.out.println("Wrong Command!! Try Again");
+                case LOGOUT:
+                    isRun = false;
+                    break;
+                case PRINT_ALL_PRODUCTS:
+                    printProducts();
+                    break;
+                case BUY_PRODUCT:
+                    buyProduct();
+                    break;
+                case PRINT_MY_ORDERS:
+                    printMyOrders();
+                    break;
+                case CANCEL_ORDER_BY_ID:
+                    cancelOrderById();
+                    break;
+                default:
+                    System.out.println("Wrong Command!! Try Again");
             }
         }
     }
@@ -122,17 +143,34 @@ public class StoreMain implements Command {
 
     private static void adminInterface() {
         boolean isRun = true;
-        String command = scanner.nextLine();
+
         while (isRun) {
+            Command.adminCommand();
+            String command = scanner.nextLine();
             switch (command) {
-                case LOGOUT -> isRun = false;
-                case ADD_PRODUCT -> addProduct();
-                case REMOVE_PRODUCT_BY_ID -> removeProductById();
-                case PRINT_PRODUCTS -> printProducts();
-                case PRINT_USERS -> printUsers();
-                case PRINT_ORDERS -> printOrders();
-                case CHANGE_ORDER_STATUS -> changeOrderStatus();
-                default -> System.out.println("Wrong Command!! Try Again");
+                case LOGOUT:
+                    isRun = false;
+                    break;
+                case ADD_PRODUCT:
+                    addProduct();
+                    break;
+                case REMOVE_PRODUCT_BY_ID:
+                    removeProductById();
+                    break;
+                case PRINT_PRODUCTS:
+                    printProducts();
+                    break;
+                case PRINT_USERS:
+                    printUsers();
+                    break;
+                case PRINT_ORDERS:
+                    printOrders();
+                    break;
+                case CHANGE_ORDER_STATUS:
+                    changeOrderStatus();
+                    break;
+                default:
+                    System.out.println("Wrong Command!! Try Again");
             }
         }
     }
@@ -166,12 +204,10 @@ public class StoreMain implements Command {
         System.out.println("please input product by id");
         String productId = scanner.nextLine();
         productStorage.removeById(productId);
-        System.out.println("product removed");
     }
 
     private static void addProduct() {
-        System.out.println("please input product id");
-        String productId = scanner.nextLine();
+        String productId = StoreIdGenerate.idGenerate();
         Product product = productStorage.getById(productId);
         if (product != null) {
             System.out.println("this product already exists");
@@ -182,9 +218,16 @@ public class StoreMain implements Command {
         System.out.println("please input product description");
         String description = scanner.nextLine();
         System.out.println("please input product price");
-        double price = Double.parseDouble(scanner.nextLine());
-        System.out.println("please input product  stockQty");
-        int stockQty = Integer.parseInt(scanner.nextLine());
+        double price = 0;
+        int stockQty = 0;
+        try {
+            price = Double.parseDouble(scanner.nextLine());
+            System.out.println("please input product  stockQty");
+            stockQty = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong argument try again");
+            return;
+        }
         System.out.println("please input product Type -  ELECTRONICS, CLOTHING, BOOKS");
         try {
             ProductType productType = ProductType.valueOf(scanner.nextLine());
@@ -194,5 +237,4 @@ public class StoreMain implements Command {
             System.out.println("Wrong type!! try again");
         }
     }
-
 }

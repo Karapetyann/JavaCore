@@ -42,6 +42,7 @@ public class ProductStorage {
                 }
             }
             size--;
+            System.out.println("product removed");
         } else {
             System.out.println("Wrong id!! try again");
         }
