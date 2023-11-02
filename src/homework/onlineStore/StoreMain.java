@@ -16,6 +16,7 @@ public class StoreMain implements Command {
     private final static UserStorage userStorage = new UserStorage();
     private final static ProductStorage productStorage = new ProductStorage();
     private final static OrderStorage orderStorage = new OrderStorage();
+    private static User qurrentUser = null;
 
     public static void main(String[] args) {
         User user = new User("077885664", "Hakob", "karapetyan@mail.ru", "364421hk", UserType.ADMIN);
@@ -68,6 +69,7 @@ public class StoreMain implements Command {
             System.out.println("Incorrect login or password");
             return;
         }
+        qurrentUser = user;
         if (user.getUserType() == UserType.ADMIN) {
             Command.adminCommand();
             adminInterface();
@@ -79,8 +81,8 @@ public class StoreMain implements Command {
 
     private static void userInterface() {
         boolean isRun = true;
-        String command = scanner.nextLine();
         while (isRun) {
+            String command = scanner.nextLine();
             switch (command) {
                 case LOGOUT:
                     isRun = false;
@@ -123,22 +125,26 @@ public class StoreMain implements Command {
             System.out.println("Wrong id!! try again");
             return;
         }
-        System.out.println(product);
-        System.out.println("please input specify product quantity");
-        int qty = Integer.parseInt(scanner.nextLine());
-        String orderId = StoreIdGenerate.idGenerate();
-        User user = userStorage.popUser();
-        String date1 = DateUtil.dateFormat;
-        Date date = DateUtil.stringToDate(date1);
-        System.out.println("please input payment method - CARD, CASH, PAYPAL");
         try {
-            PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
-            Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
-            orderStorage.addOrder(order);
+            System.out.println(product);
+            System.out.println("please input specify product quantity");
+            int qty = Integer.parseInt(scanner.nextLine());
+            boolean b = productStorage.checkQty(product, qty);
+            if (b) {
+                String orderId = StoreIdGenerate.idGenerate();
+                User user = userStorage.popUser();
+                String date1 = DateUtil.dateFormat;
+                Date date = DateUtil.stringToDate(date1);
+                System.out.println("please input payment method - CARD, CASH, PAYPAL");
+                PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
+                Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
+                orderStorage.addOrder(order);
+            }else {
+                System.out.println("stock doesn't exists");
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("Wrong method!! try again");
         }
-
     }
 
     private static void adminInterface() {

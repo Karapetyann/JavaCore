@@ -61,4 +61,8 @@ public class ProductStorage {
             }
         }
     }
+
+    public boolean checkQty(Product product, int qty) {
+        return product.getStockQty() < qty;
+    }
 }
