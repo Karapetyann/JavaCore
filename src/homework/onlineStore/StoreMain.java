@@ -1,6 +1,7 @@
 package homework.onlineStore;
 
 import homework.onlineStore.model.*;
+import homework.onlineStore.storeException.OutOfStockException;
 import homework.onlineStore.storeStorage.OrderStorage;
 import homework.onlineStore.storeStorage.ProductStorage;
 import homework.onlineStore.storeStorage.UserStorage;
@@ -125,26 +126,29 @@ public class StoreMain implements Command {
             System.out.println("Wrong id!! try again");
             return;
         }
+
+        System.out.println(product);
+
+        System.out.println("please input specify product quantity");
+        int qty = 0;
         try {
-            System.out.println(product);
-            System.out.println("please input specify product quantity");
-            int qty = Integer.parseInt(scanner.nextLine());
-            boolean b = productStorage.checkQty(product, qty);
-            if (b) {
-                String orderId = StoreIdGenerate.idGenerate();
-                User user = userStorage.popUser();
-                String date1 = DateUtil.dateFormat;
-                Date date = DateUtil.stringToDate(date1);
-                System.out.println("please input payment method - CARD, CASH, PAYPAL");
-                PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
-                Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
-                orderStorage.addOrder(order);
-            }else {
-                System.out.println("stock doesn't exists");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Wrong method!! try again");
+            qty = Integer.parseInt(scanner.nextLine());
+            productStorage.checkQty(product, qty);
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong arguments");
+        } catch (OutOfStockException o) {
+            System.out.println(o.getMessage());
         }
+        String orderId = StoreIdGenerate.idGenerate();
+        User user = userStorage.popUser();
+        String date1 = DateUtil.dateFormat;
+        Date date = DateUtil.stringToDate(date1);
+        System.out.println("please input payment method - CARD, CASH, PAYPAL");
+        PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
+        Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
+        orderStorage.addOrder(order);
+        System.out.println("stock doesn't exists");
+
     }
 
     private static void adminInterface() {

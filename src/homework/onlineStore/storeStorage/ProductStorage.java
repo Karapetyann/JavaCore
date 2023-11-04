@@ -1,10 +1,12 @@
 package homework.onlineStore.storeStorage;
 
 import homework.onlineStore.model.Product;
+import homework.onlineStore.storeException.OutOfStockException;
 
 public class ProductStorage {
     private Product[] products = new Product[10];
     private int size;
+    private Exception OutOfStockException;
 
     public void addProduct(Product product) {
         if (size == products.length) {
@@ -62,7 +64,9 @@ public class ProductStorage {
         }
     }
 
-    public boolean checkQty(Product product, int qty) {
-        return product.getStockQty() < qty;
+    public void checkQty(Product product, int qty) throws OutOfStockException {
+       if (product.getStockQty()<qty || product.getStockQty() == 0){
+           throw new  OutOfStockException("sorry there are not enough products in storage");
+       }
     }
 }
