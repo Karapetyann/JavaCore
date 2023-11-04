@@ -20,7 +20,7 @@ public class StoreMain implements Command {
     private static User qurrentUser = null;
 
     public static void main(String[] args) {
-        User user = new User("077885664", "Hakob", "karapetyan@mail.ru", "364421hk", UserType.ADMIN);
+        User user = new User("077885664", "Hakob", "karapetyan@mail.ru", "12345678", UserType.ADMIN);
         userStorage.addUser(user);
         boolean isRun = true;
         while (isRun) {
