@@ -73,6 +73,5 @@ public class OrderStorage implements Serializable {
                 StorageSerializable.serializeOrderStorage(this);
             }
         }
-
     }
 }
