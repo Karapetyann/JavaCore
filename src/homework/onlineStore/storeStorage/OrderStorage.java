@@ -4,8 +4,11 @@ import homework.onlineStore.model.Order;
 import homework.onlineStore.model.OrderStatus;
 import homework.onlineStore.model.Product;
 import homework.onlineStore.model.User;
+import homework.onlineStore.storeUtil.StorageSerializable;
 
-public class OrderStorage {
+import java.io.Serializable;
+
+public class OrderStorage implements Serializable {
     private Order[] orders = new Order[10];
     private int size;
 
@@ -14,6 +17,7 @@ public class OrderStorage {
             extend();
         }
         orders[size++] = order;
+        StorageSerializable.serializeOrderStorage(this);
     }
 
 
@@ -21,6 +25,14 @@ public class OrderStorage {
         Order[] temp = new Order[size + 10];
         System.arraycopy(orders, 0, temp, 0, orders.length);
         orders = temp;
+    }
+
+
+    public  boolean yn(String yn){
+        if (yn.equals ("YES") || yn.equals( "NO")){
+            return true;
+        }
+        return false;
     }
 
 
@@ -58,6 +70,7 @@ public class OrderStorage {
         for (int i = 0; i < size; i++) {
             if (orders[i].getId().equals(orderId)) {
                 orders[i].setOrderStatus(OrderStatus.CANCELED);
+                StorageSerializable.serializeOrderStorage(this);
             }
         }
 

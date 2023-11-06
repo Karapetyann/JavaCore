@@ -1,8 +1,11 @@
 package homework.onlineStore.storeStorage;
 
 import homework.onlineStore.model.User;
+import homework.onlineStore.storeUtil.StorageSerializable;
 
-public class UserStorage {
+import java.io.Serializable;
+
+public class UserStorage implements Serializable {
     private User[] users = new User[10];
     private int size;
 
@@ -11,6 +14,7 @@ public class UserStorage {
             extend();
         }
         users[size++] = user;
+        StorageSerializable.serializeUserStorage(this);
     }
 
     public User getByEmailAndPassword(String email, String password) {

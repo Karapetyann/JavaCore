@@ -7,6 +7,7 @@ import homework.onlineStore.storeStorage.ProductStorage;
 import homework.onlineStore.storeStorage.UserStorage;
 import homework.onlineStore.storeUtil.Command;
 import homework.onlineStore.storeUtil.DateUtil;
+import homework.onlineStore.storeUtil.StorageSerializable;
 import homework.onlineStore.storeUtil.StoreIdGenerate;
 
 import java.util.Date;
@@ -14,14 +15,12 @@ import java.util.Scanner;
 
 public class StoreMain implements Command {
     private final static Scanner scanner = new Scanner(System.in);
-    private final static UserStorage userStorage = new UserStorage();
-    private final static ProductStorage productStorage = new ProductStorage();
-    private final static OrderStorage orderStorage = new OrderStorage();
+    private final static UserStorage userStorage = StorageSerializable.deSerializeUserStorage();
+    private final static ProductStorage productStorage = StorageSerializable.deSerializeProductStorage();
+    private final static OrderStorage orderStorage = StorageSerializable.deSerializeOrderStorage();
     private static User qurrentUser = null;
 
     public static void main(String[] args) {
-        User user = new User("077885664", "Hakob", "karapetyan@mail.ru", "12345678", UserType.ADMIN);
-        userStorage.addUser(user);
         boolean isRun = true;
         while (isRun) {
             Command.loginCommand();
@@ -126,9 +125,7 @@ public class StoreMain implements Command {
             System.out.println("Wrong id!! try again");
             return;
         }
-
         System.out.println(product);
-
         System.out.println("please input specify product quantity");
         int qty = 0;
         try {
@@ -139,16 +136,22 @@ public class StoreMain implements Command {
         } catch (OutOfStockException o) {
             System.out.println(o.getMessage());
         }
-        String orderId = StoreIdGenerate.idGenerate();
-        User user = userStorage.popUser();
-        String date1 = DateUtil.dateFormat;
-        Date date = DateUtil.stringToDate(date1);
-        System.out.println("please input payment method - CARD, CASH, PAYPAL");
-        PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
-        Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
-        orderStorage.addOrder(order);
-        System.out.println("stock doesn't exists");
-
+        System.out.println("Do you really want to buy this product in"+ qty + "quantity with price"+ (qty*product.getPrice())+ " ?");
+        System.out.println("------------");
+        System.out.println("please input YES or NO");
+        String yn = scanner.nextLine();
+        boolean yn1 = orderStorage.yn(yn);
+        if (yn1) {
+            String orderId = StoreIdGenerate.idGenerate();
+            User user = userStorage.popUser();
+            String date1 = DateUtil.dateFormat;
+            Date date = DateUtil.stringToDate(date1);
+            System.out.println("please input payment method - CARD, CASH, PAYPAL");
+            PaymentMethod paymentMethod = PaymentMethod.valueOf(scanner.nextLine());
+            Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
+            orderStorage.addOrder(order);
+            System.out.println("stock doesn't exists");
+        }
     }
 
     private static void adminInterface() {
@@ -195,6 +198,7 @@ public class StoreMain implements Command {
         } else {
             Product product = orderStorage.changeOrderStatus(order);
             productStorage.deleteStockQty(product, order.getQty());
+            StorageSerializable.serializeOrderStorage(orderStorage);
         }
     }
 
