@@ -1,5 +1,7 @@
 package homework.onlineStore.model;
 
-public enum PaymentMethod {
+import java.io.Serializable;
+
+public enum PaymentMethod implements Serializable {
     CARD, CASH, PAYPAL
 }

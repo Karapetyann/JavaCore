@@ -28,8 +28,8 @@ public class OrderStorage implements Serializable {
     }
 
 
-    public  boolean yn(String yn){
-        if (yn.equals ("YES") || yn.equals( "NO")){
+    public boolean yn(String yn) {
+        if (yn.equals("YES") || yn.equals("NO")) {
             return true;
         }
         return false;

@@ -18,9 +18,14 @@ public class StoreMain implements Command {
     private final static UserStorage userStorage = StorageSerializable.deSerializeUserStorage();
     private final static ProductStorage productStorage = StorageSerializable.deSerializeProductStorage();
     private final static OrderStorage orderStorage = StorageSerializable.deSerializeOrderStorage();
+
     private static User qurrentUser = null;
 
     public static void main(String[] args) {
+
+
+
+
         boolean isRun = true;
         while (isRun) {
             Command.loginCommand();
@@ -136,7 +141,7 @@ public class StoreMain implements Command {
         } catch (OutOfStockException o) {
             System.out.println(o.getMessage());
         }
-        System.out.println("Do you really want to buy this product in"+ qty + "quantity with price"+ (qty*product.getPrice())+ " ?");
+        System.out.println("Do you really want to buy this product in" + qty + "quantity with price" + (qty * product.getPrice()) + " ?");
         System.out.println("------------");
         System.out.println("please input YES or NO");
         String yn = scanner.nextLine();
@@ -240,6 +245,9 @@ public class StoreMain implements Command {
             stockQty = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Wrong argument try again");
+            return;
+        }
+        if (stockQty <= 0 || price <= 0) {
             return;
         }
         System.out.println("please input product Type -  ELECTRONICS, CLOTHING, BOOKS");

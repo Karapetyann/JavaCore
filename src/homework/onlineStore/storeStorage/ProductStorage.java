@@ -70,8 +70,8 @@ public class ProductStorage implements Serializable {
     }
 
     public void checkQty(Product product, int qty) throws OutOfStockException {
-       if (product.getStockQty()<qty || product.getStockQty() == 0){
-           throw new  OutOfStockException("sorry there are not enough products in storage");
-       }
+        if (product.getStockQty() < qty || product.getStockQty() == 0) {
+            throw new OutOfStockException("sorry there are not enough products in storage");
+        }
     }
 }

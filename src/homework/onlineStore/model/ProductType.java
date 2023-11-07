@@ -1,5 +1,7 @@
 package homework.onlineStore.model;
 
-public enum ProductType {
+import java.io.Serializable;
+
+public enum ProductType implements Serializable {
     ELECTRONICS, CLOTHING, BOOKS
 }

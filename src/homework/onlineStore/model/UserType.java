@@ -1,5 +1,7 @@
 package homework.onlineStore.model;
 
-public enum UserType {
+import java.io.Serializable;
+
+public enum UserType implements Serializable {
     USER, ADMIN
 }

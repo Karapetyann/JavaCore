@@ -1,13 +1,19 @@
 package homework.onlineStore.storeStorage;
 
 import homework.onlineStore.model.User;
+import homework.onlineStore.model.UserType;
 import homework.onlineStore.storeUtil.StorageSerializable;
+import homework.onlineStore.storeUtil.StoreIdGenerate;
 
 import java.io.Serializable;
 
 public class UserStorage implements Serializable {
     private User[] users = new User[10];
-    private int size;
+    private int size = 0;
+
+    {
+        users[size++] = new User("12345", "Hakob", "karapetyan@mail.ru", "123456789", UserType.ADMIN);
+    }
 
     public void addUser(User user) {
         if (size == users.length) {
@@ -15,6 +21,14 @@ public class UserStorage implements Serializable {
         }
         users[size++] = user;
         StorageSerializable.serializeUserStorage(this);
+    }
+
+    public boolean getById(String id) {
+        for (int i = 0; i < size; i++) {
+            if (users[i].getId().equals(id))
+                return true;
+        }
+        return false;
     }
 
     public User getByEmailAndPassword(String email, String password) {

@@ -7,9 +7,9 @@ import homework.onlineStore.storeStorage.UserStorage;
 import java.io.*;
 
 public class StorageSerializable implements Serializable {
-    public static final String USER_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\UserStorage.data";
-    public static final String PRODUCT_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\ProductStorage.data";
-    public static final String ORDER_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\OrderStorage.data";
+    public static final String USER_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\UserStorage.txt";
+    public static final String PRODUCT_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\ProductStorage.txt";
+    public static final String ORDER_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\OrderStorage.txt";
 
 
     public static void serializeUserStorage(UserStorage userStorage) {
@@ -21,6 +21,10 @@ public class StorageSerializable implements Serializable {
     }
 
     public static UserStorage deSerializeUserStorage() {
+        File file = new File(USER_STORAGE_PATH);
+        if (!file.exists()) {
+            return new UserStorage();
+        }
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(USER_STORAGE_PATH))) {
             Object object = inputStream.readObject();
             if (object instanceof UserStorage userStorage) {
@@ -29,6 +33,7 @@ public class StorageSerializable implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return new UserStorage();
     }
 
@@ -41,6 +46,10 @@ public class StorageSerializable implements Serializable {
     }
 
     public static ProductStorage deSerializeProductStorage() {
+        File file = new File(PRODUCT_STORAGE_PATH);
+        if (!file.exists()) {
+            return new ProductStorage();
+        }
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(PRODUCT_STORAGE_PATH))) {
             Object object = inputStream.readObject();
             if (object instanceof ProductStorage productStorage) {
@@ -49,6 +58,7 @@ public class StorageSerializable implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return new ProductStorage();
     }
 
@@ -61,6 +71,10 @@ public class StorageSerializable implements Serializable {
     }
 
     public static OrderStorage deSerializeOrderStorage() {
+        File file = new File(ORDER_STORAGE_PATH);
+        if (!file.exists()) {
+            return new OrderStorage();
+        }
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ORDER_STORAGE_PATH))) {
             Object object = inputStream.readObject();
             if (object instanceof OrderStorage orderStorage) {
@@ -69,6 +83,7 @@ public class StorageSerializable implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return new OrderStorage();
     }
 }
