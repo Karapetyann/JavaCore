@@ -22,10 +22,6 @@ public class StoreMain implements Command {
     private static User qurrentUser = null;
 
     public static void main(String[] args) {
-
-
-
-
         boolean isRun = true;
         while (isRun) {
             Command.loginCommand();
