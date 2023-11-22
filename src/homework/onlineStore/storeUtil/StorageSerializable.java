@@ -6,6 +6,7 @@ import homework.onlineStore.storeStorage.UserStorage;
 
 import java.io.*;
 
+
 public class StorageSerializable implements Serializable {
     public static final String USER_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\UserStorage.txt";
     public static final String PRODUCT_STORAGE_PATH = "C:\\Users\\Hakob\\IdeaProjects\\JavaCore\\src\\homework\\onlineStore\\storeData\\ProductStorage.txt";
@@ -33,7 +34,6 @@ public class StorageSerializable implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return new UserStorage();
     }
 

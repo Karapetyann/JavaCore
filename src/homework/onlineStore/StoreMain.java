@@ -1,7 +1,6 @@
 package homework.onlineStore;
 
 import homework.onlineStore.model.*;
-import homework.onlineStore.storeException.OutOfStockException;
 import homework.onlineStore.storeStorage.OrderStorage;
 import homework.onlineStore.storeStorage.ProductStorage;
 import homework.onlineStore.storeStorage.UserStorage;
@@ -18,7 +17,6 @@ public class StoreMain implements Command {
     private final static UserStorage userStorage = StorageSerializable.deSerializeUserStorage();
     private final static ProductStorage productStorage = StorageSerializable.deSerializeProductStorage();
     private final static OrderStorage orderStorage = StorageSerializable.deSerializeOrderStorage();
-
     private static User qurrentUser = null;
 
     public static void main(String[] args) {
@@ -50,11 +48,11 @@ public class StoreMain implements Command {
         String email = scanner.nextLine();
         System.out.println("please input your password");
         String password = scanner.nextLine();
-        User user1 = userStorage.getByEmailAndPassword(email, password);
-        if (user1 == null) {
-            User user = new User(userId, name, email, password, UserType.USER);
-            userStorage.addUser(user);
+        if (!userStorage.getByEmail(email)) {
+            User user1 = new User(userId, name, email, password, UserType.USER);
+            userStorage.userPut(email, user1);
             System.out.println("successfully registered");
+            StorageSerializable.serializeUserStorage(userStorage);
         } else {
             System.out.println("this account already exists");
         }
@@ -65,13 +63,13 @@ public class StoreMain implements Command {
         String email = scanner.nextLine();
         System.out.println("please input your password");
         String password = scanner.nextLine();
-        User user = userStorage.getByEmailAndPassword(email, password);
-        if (user == null) {
+        User byUser = userStorage.getByUser(email, password);
+        if (byUser == null) {
             System.out.println("Incorrect login or password");
             return;
         }
-        qurrentUser = user;
-        if (user.getUserType() == UserType.ADMIN) {
+        qurrentUser = byUser;
+        if (byUser.getUserType() == UserType.ADMIN) {
             Command.adminCommand();
             adminInterface();
         } else {
@@ -109,11 +107,12 @@ public class StoreMain implements Command {
     private static void cancelOrderById() {
         System.out.println("please input order id");
         String orderId = scanner.nextLine();
-        orderStorage.cancelOrderById(orderId);
+        orderStorage.removedOrder(orderId);
+        StorageSerializable.serializeOrderStorage(orderStorage);
     }
 
     private static void printMyOrders() {
-        User user = userStorage.popUser();
+        User user = qurrentUser;
         orderStorage.printMyOrders(user);
     }
 
@@ -131,20 +130,19 @@ public class StoreMain implements Command {
         int qty = 0;
         try {
             qty = Integer.parseInt(scanner.nextLine());
-            productStorage.checkQty(product, qty);
+            if (product.getStockQty() < qty || product.getStockQty() <= 0) {
+                System.out.println("not enough products in storage");
+            }
         } catch (NumberFormatException e) {
             System.out.println("Wrong arguments");
-        } catch (OutOfStockException o) {
-            System.out.println(o.getMessage());
         }
         System.out.println("Do you really want to buy this product in" + qty + "quantity with price" + (qty * product.getPrice()) + " ?");
         System.out.println("------------");
         System.out.println("please input YES or NO");
-        String yn = scanner.nextLine();
-        boolean yn1 = orderStorage.yn(yn);
-        if (yn1) {
+        String yesOrNo = scanner.nextLine();
+        if (yesOrNo.equals("yes".toLowerCase())) {
             String orderId = StoreIdGenerate.idGenerate();
-            User user = userStorage.popUser();
+            User user = qurrentUser;
             String date1 = DateUtil.dateFormat;
             Date date = DateUtil.stringToDate(date1);
             System.out.println("please input payment method - CARD, CASH, PAYPAL");
@@ -152,6 +150,7 @@ public class StoreMain implements Command {
             Order order = new Order(orderId, user, product, date, product.getPrice(), OrderStatus.NEW, qty, paymentMethod);
             orderStorage.addOrder(order);
             System.out.println("stock doesn't exists");
+            StorageSerializable.serializeOrderStorage(orderStorage);
         }
     }
 
@@ -197,9 +196,12 @@ public class StoreMain implements Command {
         if (order == null) {
             System.out.println("wrong order id!! try again");
         } else {
-            Product product = orderStorage.changeOrderStatus(order);
-            productStorage.deleteStockQty(product, order.getQty());
-            StorageSerializable.serializeOrderStorage(orderStorage);
+            order.setOrderStatus(OrderStatus.DELIVERED);
+            Product product = orderStorage.orderByProduct(order);
+            if (product != null) {
+                productStorage.deleteStockQty(product, order.getQty());
+                StorageSerializable.serializeOrderStorage(orderStorage);
+            }
         }
     }
 
@@ -218,7 +220,10 @@ public class StoreMain implements Command {
     private static void removeProductById() {
         System.out.println("please input product by id");
         String productId = scanner.nextLine();
-        productStorage.removeById(productId);
+        if (productStorage.removeProductById(productId)) {
+            System.out.println("create removed");
+        }
+        StorageSerializable.serializeProductStorage(productStorage);
     }
 
     private static void addProduct() {
@@ -226,7 +231,6 @@ public class StoreMain implements Command {
         Product product = productStorage.getById(productId);
         if (product != null) {
             System.out.println("this product already exists");
-            return;
         }
         System.out.println("please input product name");
         String name = scanner.nextLine();
@@ -239,6 +243,7 @@ public class StoreMain implements Command {
             price = Double.parseDouble(scanner.nextLine());
             System.out.println("please input product  stockQty");
             stockQty = Integer.parseInt(scanner.nextLine());
+
         } catch (NumberFormatException e) {
             System.out.println("Wrong argument try again");
             return;
@@ -251,6 +256,7 @@ public class StoreMain implements Command {
             ProductType productType = ProductType.valueOf(scanner.nextLine());
             Product product1 = new Product(productId, name, description, price, stockQty, productType);
             productStorage.addProduct(product1);
+            StorageSerializable.serializeProductStorage(productStorage);
         } catch (IllegalArgumentException e) {
             System.out.println("Wrong type!! try again");
         }

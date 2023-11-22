@@ -2,59 +2,48 @@ package homework.onlineStore.storeStorage;
 
 import homework.onlineStore.model.User;
 import homework.onlineStore.model.UserType;
-import homework.onlineStore.storeUtil.StorageSerializable;
-import homework.onlineStore.storeUtil.StoreIdGenerate;
+
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserStorage implements Serializable {
-    private User[] users = new User[10];
-    private int size = 0;
+
+
+    private Map<String, User> userMap = new HashMap<>();
 
     {
-        users[size++] = new User("12345", "Hakob", "karapetyan@mail.ru", "123456789", UserType.ADMIN);
+        userMap.put(null, new User("12345","Hakob","hakob@mail.ru","12345", UserType.ADMIN));
     }
 
-    public void addUser(User user) {
-        if (size == users.length) {
-            extend();
+
+    public void printUsers() {
+        for (String user : userMap.keySet()) {
+            System.out.println(user);
         }
-        users[size++] = user;
-        StorageSerializable.serializeUserStorage(this);
     }
 
-    public boolean getById(String id) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getId().equals(id))
-                return true;
-        }
-        return false;
-    }
 
-    public User getByEmailAndPassword(String email, String password) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
-                return users[i];
+    public User getByUser(String email, String password) {
+        for (User value : userMap.values()) {
+            if (value.getEmail().equals(email) && value.getPassword().equals(password)) {
+                return value;
             }
         }
         return null;
     }
 
-    private void extend() {
-        User[] temp = new User[size + 10];
-        System.arraycopy(users, 0, temp, 0, users.length);
-        users = temp;
-    }
-
-
-    public void printUsers() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
+    public boolean getByEmail(String email) {
+        for (String s : userMap.keySet()) {
+            if (s.equals(email)) {
+                return true;
+            }
         }
-
+        return false;
     }
 
-    public User popUser() {
-        return users[size];
+    public void userPut(String email, User user1) {
+        userMap.put(email, user1);
     }
 }
