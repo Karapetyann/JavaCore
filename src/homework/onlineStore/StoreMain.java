@@ -17,6 +17,10 @@ public class StoreMain implements Command {
     private final static UserStorage userStorage = StorageSerializable.deSerializeUserStorage();
     private final static ProductStorage productStorage = StorageSerializable.deSerializeProductStorage();
     private final static OrderStorage orderStorage = StorageSerializable.deSerializeOrderStorage();
+    static {
+        userStorage.userPut("admin@mail.ru", new User("12345","Hakob","admin@mail.ru","12345", UserType.ADMIN));
+        StorageSerializable.serializeUserStorage(userStorage);
+    }
     private static User qurrentUser = null;
 
     public static void main(String[] args) {

@@ -60,5 +60,6 @@ public class OrderStorage implements Serializable {
 
     public void addOrder(Order order) {
         orderList.add(order);
+
     }
 }

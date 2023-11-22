@@ -2,6 +2,7 @@ package homework.onlineStore.storeStorage;
 
 import homework.onlineStore.model.User;
 import homework.onlineStore.model.UserType;
+import homework.onlineStore.storeUtil.StorageSerializable;
 
 
 import java.io.Serializable;
@@ -13,9 +14,7 @@ public class UserStorage implements Serializable {
 
     private Map<String, User> userMap = new HashMap<>();
 
-    {
-        userMap.put(null, new User("12345","Hakob","hakob@mail.ru","12345", UserType.ADMIN));
-    }
+
 
 
     public void printUsers() {
@@ -45,5 +44,6 @@ public class UserStorage implements Serializable {
 
     public void userPut(String email, User user1) {
         userMap.put(email, user1);
+
     }
 }
